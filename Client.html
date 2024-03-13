@@ -1,0 +1,51 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Real Time Data Points with ECharts and Flask-SocketIO</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+</head>
+<body>
+    <div id="main" style="width: 600px;height:400px;"></div>
+    <script type="text/javascript">
+        var socket = io("127.0.0.1:5000");
+        var myChart = echarts.init(document.getElementById('main'));
+        var data = [];
+
+        var option = {
+            xAxis: {
+                type: 'value',
+                boundaryGap: false,
+                scale: true
+            },
+            yAxis: {
+                type: 'value',
+                boundaryGap: false,
+                scale: true
+            },
+            series: [{
+                type: 'scatter',
+                data: [],
+                symbolSize: 5,
+                animation: false
+            }]
+        };
+
+        myChart.setOption(option);
+
+        socket.on('sin_wave', function(msg) {
+            if (data.length > 500) {
+                data.shift();
+            }
+            data.push([msg.x, msg.y]);
+            myChart.setOption({
+                series: [{
+                    data: data.slice()
+                }]
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+
+Flask
+Flask-socketio
+eventlet
+python-socketio[client]
