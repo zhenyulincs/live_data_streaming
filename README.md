@@ -5,6 +5,9 @@
 
 This project demonstrates how to implement a live stream data visualization system using Flask and SocketIO for the backend (`Server.py`) and HTML with ECharts and Socket.IO for the frontend (`Client.html`). The primary goal is to stream real-time data points to a web-based interface, showcasing a dynamic and interactive way to display information, such as a continuously updating sine wave graph.
 
+![live data streaming demo](demo.gif)
+
+
 ## Files Overview
 
 ### `Server.py`
